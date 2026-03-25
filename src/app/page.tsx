@@ -371,7 +371,7 @@ export default function PDAVisualizer() {
       const topOfStack = currentStack.length > 0 ? currentStack[currentStack.length - 1] : null;
       
       const availableTransitions = pda.transitions.filter(t => {
-        const fromMatch = t.from.replace('*', '') === currentStateTemp.replace('*');
+        const fromMatch = t.from.replace('*', '') === currentStateTemp.replace('*', '');
         const readMatch = t.read === 'ε' || t.read === readSymbol;
         const popMatch = t.pop === 'ε' || t.pop === '' || t.pop === topOfStack;
         return fromMatch && readMatch && popMatch;
