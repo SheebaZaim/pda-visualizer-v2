@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
+  variable: "--font-ui",
+  display: 'swap',
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
+  variable: "--font-code",
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: "PDA Visualizer - Pushdown Automata Tool",
-  description: "Visualize Pushdown Automata with interactive simulations",
+  title: "PDA Visualizer - Pushdown Automata Simulator",
+  description: "Interactive tool for visualizing and simulating Pushdown Automata",
 };
 
 export default function RootLayout({
@@ -24,9 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} antialiased`}>
         {children}
       </body>
     </html>
