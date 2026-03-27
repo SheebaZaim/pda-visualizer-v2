@@ -1,7 +1,12 @@
 'use client';
 
+// PDA Visualizer - Built for Automata Theory course
+// Author: Sheeba Zaim
+// Last updated: March 2026
+
 import React, { useState, useEffect, useRef } from 'react';
 
+// Type definitions for PDA structure
 interface Transition {
   from: string;
   read: string;
@@ -26,6 +31,8 @@ interface Example {
   testString: string;
 }
 
+// Pre-loaded example PDAs for testing
+// TODO: Add more examples (divisible by 3, even parity, etc.)
 const examples: Record<string, Example> = {
   balanced: {
     name: 'Balanced Parentheses',
@@ -76,26 +83,42 @@ const examples: Record<string, Example> = {
 };
 
 export default function PDAVisualizer() {
+  // Theme state
   const [theme, setTheme] = useState('dark');
+  
+  // UI state
   const [howItWorksCollapsed, setHowItWorksCollapsed] = useState(false);
+  
+  // PDA configuration
   const [pda, setPda] = useState<PDA | null>(null);
   const [transitions, setTransitions] = useState<Transition[]>([]);
+  
+  // Test input
   const [testInput, setTestInput] = useState('');
+  
+  // Simulation state
   const [stack, setStack] = useState(['Z0']);
   const [currentState, setCurrentState] = useState<string | null>(null);
   const [tapePosition, setTapePosition] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [stepCount, setStepCount] = useState(0);
-  const [simulationSpeed, setSimulationSpeed] = useState(800);
+  
+  // Settings
+  const [simulationSpeed, setSimulationSpeed] = useState(800); // Default: medium speed
   const [resultStatus, setResultStatus] = useState<'idle' | 'running' | 'accepted' | 'rejected'>('idle');
   const [resultMessage, setResultMessage] = useState('Enter an input string and click Play to simulate');
   const [stepLog, setStepLog] = useState<string[]>([]);
+  
+  // Auto-generate
   const [nlDescription, setNlDescription] = useState('');
   const [nlError, setNlError] = useState('');
+  
+  // Manual configuration
   const [statesInput, setStatesInput] = useState('');
   const [inputAlphabet, setInputAlphabet] = useState('');
   const [stackAlphabet, setStackAlphabet] = useState('');
 
+  // Refs for canvas and DOM elements
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const stepLogRef = useRef<HTMLDivElement>(null);
 
